@@ -12,7 +12,6 @@ export async function connectToDatabase(uri: string) {
   await client.connect();
 
   const db = client.db("WebProject");
-  //await applySchemaValidation(db);
 
   const moviesCollection = db.collection<Movie>("movies");
   collections.movies = moviesCollection;
@@ -24,12 +23,3 @@ export async function connectToDatabase(uri: string) {
 
   collections.users = userCollection;
 }
-
-/*async function applySchemaValidation(db: mongodb.Db){
-    const jsonSchema = {
-        $jsonSchema: {
-            bsonType: 'object',
-            required: []
-        }
-    }
-}*/
