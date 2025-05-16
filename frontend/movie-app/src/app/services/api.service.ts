@@ -10,6 +10,10 @@ const BASE_URL = 'http://localhost:5200';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
+  public pingBackend() {
+    return this.http.get(`${BASE_URL}/movies/ping`, { responseType: 'text' });
+  }
+
   async userSignUp(userData: any) {
     return await firstValueFrom(
       this.http.post(`${BASE_URL}/user/sign-up`, userData)
