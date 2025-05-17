@@ -19,7 +19,13 @@ if (!ATLAS_URI) {
 connectToDatabase(ATLAS_URI)
   .then(() => {
     const app = express();
-    app.use(cors());
+    app.use(
+      cors({
+        origin: "http://localhost:4200",
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        credentials: true,
+      })
+    );
     app.use(express.json());
 
     app.use("/movies", movieRouter);
