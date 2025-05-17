@@ -6,6 +6,11 @@ import { movieSchema } from "../models/movie";
 export const movieRouter = express.Router();
 movieRouter.use(express.json());
 
+//Test stuff
+movieRouter.get("/ping", (req, res) => {
+  res.send("Hello, we are connected!");
+});
+
 // GET all movies for user
 movieRouter.get("/favourites", async (req, res) => {
   try {
