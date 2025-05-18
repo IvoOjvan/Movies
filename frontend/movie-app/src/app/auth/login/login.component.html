@@ -1,0 +1,52 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form mt-5">
+  <div class="card shadow p-4 login-card">
+    <h4 class="text-center mb-3">Login</h4>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input
+        type="email"
+        formControlName="email"
+        id="email"
+        placeholder="Enter Email"
+        class="form-control"
+      />
+      @if ( loginForm.get('email')?.hasError('required') &&
+      loginForm.get('email')?.touched) {
+      <div>Email is required.</div>
+      } @else if ( loginForm.get('email')?.hasError('invalidEmail') &&
+      loginForm.get('email')?.touched) {
+
+      <div>Please enter a valid email.</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password:</label>
+      <input
+        type="password"
+        formControlName="password"
+        id="password"
+        placeholder="Enter Password"
+        class="form-control"
+      />
+      @if (loginForm.get('password')?.hasError('required') &&
+      loginForm.get('password')?.touched) {
+      <div>Password is required.</div>
+      } @else if ( loginForm.get('password')?.hasError('invalidPassword') &&
+      loginForm.get('password')?.touched) {
+      <div>
+        Password must contain uppercase, lowercase, numbers, and be at least 6
+        characters long.
+      </div>
+      }
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="loginForm.invalid"
+      class="btn btn-primary"
+    >
+      Login
+    </button>
+  </div>
+</form>

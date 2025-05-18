@@ -11,7 +11,7 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   public pingBackend() {
-    return this.http.get(`${BASE_URL}/movies/ping`, { responseType: 'text' });
+    return this.http.get(`${BASE_URL}/movies/ping`, { responseType: 'text', withCredentials: true });
   }
 
   async userSignUp(userData: any) {
