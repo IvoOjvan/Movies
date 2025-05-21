@@ -1,0 +1,39 @@
+<header>
+  <nav class="navbar navbar-expand-lg custom-navbar">
+    <div
+      class="container-fluid d-flex justify-content-between align-items-center"
+    >
+      <div class="d-flex align-items-center">
+        <li class="nav-item logo-item me-3">
+          <img
+            class="logo"
+            src="assets/images/logo.png"
+            alt="Logo"
+            tabindex="0"
+            (click)="navigateHome()"
+            (keydown.enter)="navigateHome()"
+            (keydown.space)="navigateHome()"
+          />
+        </li>
+        <a class="nav-link me-3" [routerLink]="['/add-movie']">Add Movie</a>
+        <a class="nav-link" [routerLink]="['/favourites']">My Favourites</a>
+      </div>
+
+      <div class="d-flex align-items-center">
+        <ng-icon
+          class="search-icon me-5"
+          name="bootstrapSearch"
+          role="img"
+          aria-label="search-icon"
+        ></ng-icon>
+
+        @if (!userIsAuthenticated) {
+        <a class="nav-link me-3" [routerLink]="['/user/login']">Login</a>
+        <a class="nav-link me-2" [routerLink]="['/user/signup']">Register</a>
+        } @else {
+        <button class="btn btn-danger me-2" (click)="onLogout()">Logout</button>
+        }
+      </div>
+    </div>
+  </nav>
+</header>

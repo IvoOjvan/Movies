@@ -22,8 +22,4 @@ export class HomeComponent {
       error: (err) => console.log('Error fetching TMDB movies:', err),
     });
   }
-
-  public onLogout() {
-    this.authService.logout();
-  }
 }

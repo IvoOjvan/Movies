@@ -1,0 +1,17 @@
+$color-greenish-blue: #27838b;
+
+.custom-navbar{
+    background-color: $color-greenish-blue;
+}
+
+.logo-item{
+    list-style-type: none;
+
+    .logo{
+        height: 4rem;
+    }
+}
+
+.nav-link, .search-icon{
+    color: white;
+}

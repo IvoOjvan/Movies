@@ -37,11 +37,12 @@ userRouter.post("/signup", async (req, res) => {
           userId: result.insertedId.toString(),
         },
         JWT_SECRET,
-        { expiresIn: "24h" }
+        { expiresIn: "6h" }
       );
       res.status(200).send({
         message: "Registration successful.",
         token,
+        expiresIn: 6 * 60 * 60,
         user: {
           email: newUser.email,
           firstname: newUser.firstname,
@@ -96,6 +97,7 @@ userRouter.post("/login", async (req, res) => {
         res.status(200).send({
           message: "Login successful.",
           token,
+          expiresIn: 6 * 60 * 60,
           user: {
             email: user.email,
             firstname: user.firstname,

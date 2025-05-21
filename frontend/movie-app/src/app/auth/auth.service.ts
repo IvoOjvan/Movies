@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { UserLogin } from '../dtos/user.dto';
 
@@ -13,7 +13,7 @@ export class AuthService {
   private isAuthenticated = false;
   private token!: string;
   private tokenTimer!: ReturnType<typeof setTimeout>;
-  private authStatusListener = new Subject<boolean>();
+  private authStatusListener = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -21,11 +21,19 @@ export class AuthService {
     return this.token;
   }
 
+  public getIsAuth() {
+    return this.isAuthenticated;
+  }
+
+  public getAuthStatusListener() {
+    return this.authStatusListener.asObservable();
+  }
+
   public login(email: string, password: string) {
     const authData: UserLogin = { email: email, password: password };
     this.http
       .post<{ token: string; expiresIn: number }>(
-        'http://localhost:4200/user/login',
+        'http://localhost:5200/user/login',
         authData
       )
       .subscribe((Response) => {
@@ -35,6 +43,7 @@ export class AuthService {
           const expiresInDuration = Response.expiresIn;
           this.setAuthTimer(expiresInDuration);
           this.isAuthenticated = true;
+          console.log('Emitting true after login');
           this.authStatusListener.next(true);
 
           const now = new Date();
@@ -43,7 +52,7 @@ export class AuthService {
           );
           console.log(expirationDate);
           this.saveAuthData(token, expirationDate);
-          // this.router.navigate(['/home']);  STAVLJENO PREUSMJERAVANJE U LOGIN COMPONENTU DIREKTNO
+          this.router.navigate(['/home']);
         }
       });
   }
@@ -51,6 +60,8 @@ export class AuthService {
   public autoAuthUser() {
     const authInformation = this.getAuthData();
     if (!authInformation) {
+      console.log('No auth info, emitting false');
+      this.authStatusListener.next(false);
       return;
     }
     const now = new Date();
@@ -60,7 +71,11 @@ export class AuthService {
       this.token = authInformation?.token;
       this.isAuthenticated = true;
       this.setAuthTimer(expiresIn / 1000); //works with ms so wwe are dividing it with 1000
+      console.log('Valid token, emitting true');
       this.authStatusListener.next(true);
+    } else {
+      console.log('Token expired, emitting false');
+      this.authStatusListener.next(false);
     }
   }
 
@@ -70,7 +85,6 @@ export class AuthService {
     this.authStatusListener.next(false);
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    //this.router.navigate(['/']);
     this.router.navigate(['/home']);
   }
 
@@ -103,7 +117,3 @@ export class AuthService {
     };
   }
 }
-//TODO:
-// u header komponenti za mijenjanje buttona na login/logout ovisno je li user logiran
-// treba se dodati this.userIsAuthenticated = this.authService.getIsAuth(); i to
-// postaviti 1. u ngOnInit()

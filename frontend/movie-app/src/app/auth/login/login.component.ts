@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { LoginResponse } from '../../dtos/user.dto';
+// import { LoginResponse } from '../../dtos/user.dto';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,40 @@ export class LoginComponent {
     password: new FormControl(''),
   });
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
+  // onSubmit() {
+  //   if (this.loginForm.valid) {
+  //     console.log('Login Form Submitted:', this.loginForm.value);
+
+  //     const loginData = {
+  //       email: this.loginForm.value.email,
+  //       password: this.loginForm.value.password,
+  //     };
+
+  //     this.http
+  //       .post<LoginResponse>('http://localhost:5200/user/login', loginData)
+  //       .subscribe({
+  //         next: (response) => {
+  //           console.log('Login successful:', response);
+  //           // Store the token and user data in localStorage
+  //           localStorage.setItem('token', response.token);
+  //           localStorage.setItem('user', JSON.stringify(response.user));
+
+  //           //alert('Login successful!'); //Change alert!
+  //           this.router.navigate(['/home']);
+  //         },
+  //         error: (error) => {
+  //           console.error('Login failed:', error);
+  //           alert(error.error.message || 'Login failed. Please try again.');
+  //         },
+  //       });
+  //   }
+  // }
 
   onSubmit() {
     if (this.loginForm.valid) {
@@ -28,23 +62,7 @@ export class LoginComponent {
         password: this.loginForm.value.password,
       };
 
-      this.http
-        .post<LoginResponse>('http://localhost:5200/user/login', loginData)
-        .subscribe({
-          next: (response) => {
-            console.log('Login successful:', response);
-            // Store the token and user data in localStorage
-            localStorage.setItem('token', response.token);
-            localStorage.setItem('user', JSON.stringify(response.user));
-
-            alert('Login successful!'); //Change alert!
-            this.router.navigate(['/home']);
-          },
-          error: (error) => {
-            console.error('Login failed:', error);
-            alert(error.error.message || 'Login failed. Please try again.');
-          },
-        });
+      this.authService.login(loginData.email || '', loginData.password || '');
     }
   }
 }

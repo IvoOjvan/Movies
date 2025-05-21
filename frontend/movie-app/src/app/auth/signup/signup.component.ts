@@ -49,6 +49,37 @@ export class SignupComponent implements OnInit {
     });
   }
 
+  // public onSubmit() {
+  //   if (this.signupForm.valid) {
+  //     console.log('Signup FOrm Submitted:', this.signupForm.value);
+
+  //     const signupData = {
+  //       email: this.signupForm.value.email,
+  //       password: this.signupForm.value.password,
+  //       firstname: this.signupForm.value.firstName,
+  //       lastname: this.signupForm.value.lastName,
+  //     };
+
+  //     this.http
+  //       .post<SignupResponse>('http://localhost:5200/user/signup', signupData)
+  //       .subscribe({
+  //         next: (response) => {
+  //           console.log('Signup successful:', response);
+  //           //Store the token in localstorage
+  //           localStorage.setItem('token', response.token);
+  //           localStorage.setItem('user', JSON.stringify(response.user));
+  //           //ADd redirect to login page
+  //           this.router.navigate(['/user/login']);
+  //         },
+  //         error: (error) => {
+  //           console.error('Signup failed:', error);
+  //           localStorage.removeItem('token');
+  //           localStorage.removeItem('user');
+  //         },
+  //       });
+  //   }
+  // }
+
   public onSubmit() {
     if (this.signupForm.valid) {
       console.log('Signup FOrm Submitted:', this.signupForm.value);
@@ -65,16 +96,9 @@ export class SignupComponent implements OnInit {
         .subscribe({
           next: (response) => {
             console.log('Signup successful:', response);
-            //Store the token in localstorage
-            localStorage.setItem('token', response.token);
-            localStorage.setItem('user', JSON.stringify(response.user));
-            //ADd redirect to login page
-            this.router.navigate(['/user/login']);
           },
           error: (error) => {
             console.error('Signup failed:', error);
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
           },
         });
     }

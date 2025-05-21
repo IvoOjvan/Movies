@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { LoginResponse, SignupResponse } from '../dtos/user.dto';
 
 const BASE_URL = 'http://localhost:5200';
 
@@ -18,17 +17,17 @@ export class ApiService {
     });
   }
 
-  async userSignUp(userData: SignupResponse) {
-    return await firstValueFrom(
-      this.http.post(`${BASE_URL}/user/signup`, userData) ///auth/signup`
-    );
-  }
+  // async userSignUp(userData: SignupResponse) {
+  //   return await firstValueFrom(
+  //     this.http.post(`${BASE_URL}/user/signup`, userData) ///auth/signup`
+  //   );
+  // }
 
-  async userSignIn(userData: LoginResponse) {
-    return await firstValueFrom(
-      this.http.post(`${BASE_URL}/user/login`, userData)
-    );
-  }
+  // async userSignIn(userData: LoginResponse) {
+  //   return await firstValueFrom(
+  //     this.http.post(`${BASE_URL}/user/login`, userData)
+  //   );
+  // }
 
   // async getFavouriteMovies(userId: string) {
   //   return await firstValueFrom(

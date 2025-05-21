@@ -25,13 +25,13 @@ export interface SignupResponse {
   };
 }
 
-export interface LoginResponse {
-  message: string;
-  token: string;
-  user: {
-    email: string;
-    firstname: string;
-    lastname: string;
-    userId: string;
-  };
-}
+// export interface LoginResponse {
+//   message: string;
+//   token: string;
+//   user: {
+//     email: string;
+//     firstname: string;
+//     lastname: string;
+//     userId: string;
+//   };
+// }
