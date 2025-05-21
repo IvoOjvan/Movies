@@ -9,14 +9,29 @@ export interface UserDTO {
   movies?: MovieDTO[];
 }
 
-export interface UserSignUp {
-  email: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-}
-
 export interface UserLogin {
   email: string;
   password: string;
+}
+
+export interface SignupResponse {
+  message: string;
+  token: string;
+  user: {
+    email: string;
+    firstname: string;
+    lastname: string;
+    userId: string;
+  };
+}
+
+export interface LoginResponse {
+  message: string;
+  token: string;
+  user: {
+    email: string;
+    firstname: string;
+    lastname: string;
+    userId: string;
+  };
 }

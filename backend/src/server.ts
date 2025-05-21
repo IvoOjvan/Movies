@@ -1,18 +1,25 @@
 import * as dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
 import { connectToDatabase } from "./database";
 import { movieRouter } from "./routes/movies.routes";
 import { userRouter } from "./routes/users.routes";
-
-dotenv.config();
+import { authenticateToken } from "./middleware/auth";
 
 const { ATLAS_URI } = process.env;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 if (!ATLAS_URI) {
   console.error(
     "No ATLAS_URI enviroment variable has been defined in config.env"
   );
+  process.exit(1);
+}
+
+if (!JWT_SECRET) {
+  console.error("No JWT_SECRET environment variable has been defined!");
   process.exit(1);
 }
 
@@ -28,7 +35,7 @@ connectToDatabase(ATLAS_URI)
     );
     app.use(express.json());
 
-    app.use("/movies", movieRouter);
+    app.use("/movies", authenticateToken, movieRouter);
     app.use("/user", userRouter);
 
     app.listen(5200, () => {
