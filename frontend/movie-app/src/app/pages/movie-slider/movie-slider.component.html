@@ -1,0 +1,27 @@
+<swiper-container
+  loop="true"
+  speed="500"
+  navigation="true"
+  breakpoints='{
+        "640":{"slidesPerView": 1},
+        "768":{"slidesPerView": 3},
+        "1024":{"slidesPerView": 7}
+    }'
+  class="mb-4"
+>
+  @for (movie of movies; track movie.id) {
+  <swiper-slide lazy="true">
+    <a [routerLink]="['/movie', movie.id]" class="movie-card">
+      <img
+        [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+        alt="movie-card-item"
+        class="card-img-top"
+      />
+    </a>
+    <div class="text-center mt-2">
+      <h5 class="card-title">{{ movie.title }}</h5>
+      <p>{{ movie.release_date }}</p>
+    </div>
+  </swiper-slide>
+  }
+</swiper-container>

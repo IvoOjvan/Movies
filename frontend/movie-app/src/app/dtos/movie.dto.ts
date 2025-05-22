@@ -15,3 +15,10 @@ export interface MovieDTO {
   vote_average: number;
   vote_count: number;
 }
+
+export interface TMDBResponse {
+  page: number;
+  results: MovieDTO[];
+  total_pages: number;
+  total_results: number;
+}
