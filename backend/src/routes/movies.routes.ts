@@ -14,7 +14,7 @@ movieRouter.get("/ping", (req, res) => {
 // GET all movies for user
 movieRouter.get("/favourites", async (req, res) => {
   try {
-    const { userId } = req?.body;
+    const userId = req.user.userId;
     const query = { _id: new ObjectId(userId) };
 
     const user = await collections.users?.findOne(query);
@@ -32,6 +32,7 @@ movieRouter.get("/favourites", async (req, res) => {
   }
 });
 
+//ne koristim
 movieRouter.get("/favourites/:movieId", async (req, res) => {
   try {
     const userId = req.body.userId;
@@ -57,7 +58,7 @@ movieRouter.get("/favourites/:movieId", async (req, res) => {
 movieRouter.post("/:movieId/favourite", async (req, res) => {
   try {
     const movie = req.body.movie;
-    const userId = req.body.userId;
+    const userId = req.user.userId;
 
     const user = await collections.users?.findOne({
       _id: new ObjectId(userId),
@@ -99,7 +100,7 @@ movieRouter.post("/:movieId/favourite", async (req, res) => {
 movieRouter.delete("/:movieId/favourite", async (req, res) => {
   try {
     const movieId = Number(req?.params?.movieId);
-    const userId = req.body.userId;
+    const userId = req.user.userId;
 
     const query = { _id: new ObjectId(userId) };
     const result = await collections.users?.updateOne(query, {
