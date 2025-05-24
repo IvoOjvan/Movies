@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 import { provideIcons } from '@ng-icons/core';
@@ -21,7 +20,7 @@ export class SearchBarComponent implements OnInit {
   public searchControl = new FormControl();
   public results: MovieDTO[] = [];
 
-  constructor(public apiService: ShowApiDataService, private router: Router) {}
+  constructor(public apiService: ShowApiDataService) {}
 
   ngOnInit(): void {
     this.searchControl.valueChanges
