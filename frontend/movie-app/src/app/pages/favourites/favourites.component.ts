@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { ShowApiDataService } from '../../services/show-api-data.service';
 import { MovieDTO } from '../../dtos/movie.dto';
 import { FavouritesService } from '../../services/favourites.service';
-import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-favourites',
@@ -14,7 +16,7 @@ export class FavouritesComponent implements OnInit {
 
   constructor(
     private favouritesService: FavouritesService,
-    private router: Router
+    public showApiData: ShowApiDataService
   ) {}
 
   ngOnInit(): void {
@@ -33,9 +35,5 @@ export class FavouritesComponent implements OnInit {
     return path
       ? `https://image.tmdb.org/t/p/w500${path}`
       : 'assets/images/logo.png';
-  }
-
-  public goToDetails(movieId: number) {
-    this.router.navigate(['/movie', movieId]);
   }
 }

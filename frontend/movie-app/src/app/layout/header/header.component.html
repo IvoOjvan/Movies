@@ -19,13 +19,6 @@
       </div>
 
       <div class="d-flex align-items-center">
-        <ng-icon
-          class="search-icon me-5"
-          name="bootstrapSearch"
-          role="img"
-          aria-label="search-icon"
-        ></ng-icon>
-
         @if (!userIsAuthenticated) {
         <a class="nav-link me-3" [routerLink]="['/user/login']">Login</a>
         <a class="nav-link me-2" [routerLink]="['/user/signup']">Register</a>

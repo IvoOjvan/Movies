@@ -1,5 +1,4 @@
 export interface MovieDTO {
-  //backend structure
   _id?: object;
   adult: boolean;
   backdrop_path: string;

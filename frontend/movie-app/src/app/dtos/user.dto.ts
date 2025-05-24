@@ -1,11 +1,11 @@
 import { MovieDTO } from './movie.dto';
 
 export interface UserDTO {
-  id: object; //na backendu _id
+  id: object;
   email: string;
   password: string;
   first_name: string;
-  last_name: string; //na backendu lastname
+  last_name: string;
   movies?: MovieDTO[];
 }
 
@@ -24,14 +24,3 @@ export interface SignupResponse {
     userId: string;
   };
 }
-
-// export interface LoginResponse {
-//   message: string;
-//   token: string;
-//   user: {
-//     email: string;
-//     firstname: string;
-//     lastname: string;
-//     userId: string;
-//   };
-// }
