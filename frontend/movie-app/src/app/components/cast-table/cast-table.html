@@ -6,10 +6,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let actor of data">
-      <td>{{ actor.character }}</td>
-      <td>{{ actor.name }}</td>
-    </tr>
     @for (actor of cast; track actor.id) {
     <tr>
       <td>{{ actor.character }}</td>
@@ -32,9 +28,8 @@
       [(ngModel)]="pageSize"
       (ngModelChange)="refreshData()"
     >
-      <option [ngValue]="4">4 items per page</option>
-      <option [ngValue]="6">6 items per page</option>
       <option [ngValue]="8">8 items per page</option>
+      <option [ngValue]="12">12 items per page</option>
     </select>
   </div>
 </div>
