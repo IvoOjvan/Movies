@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common';
 import { FavouritesService } from '../../services/favourites.service';
 import { ShowApiDataService } from '../../services/show-api-data.service';
 import { MovieDetails, MovieDTO } from '../../dtos/movie.dto';
+import { CastTablePagination } from '../../components/cast-table/cast-table-pagination';
 
 @Component({
   selector: 'app-details-page',
-  imports: [CommonModule],
+  imports: [CommonModule, CastTablePagination],
   templateUrl: './details-page.component.html',
   styleUrl: './details-page.component.scss',
 })

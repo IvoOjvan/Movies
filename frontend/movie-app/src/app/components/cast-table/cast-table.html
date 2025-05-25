@@ -1,0 +1,40 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Character</th>
+      <th scope="col">Actor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let actor of data">
+      <td>{{ actor.character }}</td>
+      <td>{{ actor.name }}</td>
+    </tr>
+    @for (actor of cast; track actor.id) {
+    <tr>
+      <td>{{ actor.character }}</td>
+      <td>{{ actor.name }}</td>
+    </tr>
+    }
+  </tbody>
+</table>
+<div class="d-flex flex-wrap justify-content-between gap-2 p-2">
+  <div class="flex-grow-1">
+    <ngb-pagination
+      [collectionSize]="collectionSize"
+      [(page)]="page"
+      [pageSize]="pageSize"
+      (pageChange)="refreshData()"
+    ></ngb-pagination>
+    <select
+      class="form-select"
+      style="width: auto"
+      [(ngModel)]="pageSize"
+      (ngModelChange)="refreshData()"
+    >
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+      <option [ngValue]="8">8 items per page</option>
+    </select>
+  </div>
+</div>
