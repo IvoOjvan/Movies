@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ShowApiDataService } from '../../services/show-api-data.service';
 import { MovieDTO } from '../../dtos/movie.dto';
 import { FavouritesService } from '../../services/favourites.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-favourites',
@@ -16,7 +17,8 @@ export class FavouritesComponent implements OnInit {
 
   constructor(
     private favouritesService: FavouritesService,
-    public showApiData: ShowApiDataService
+    public showApiData: ShowApiDataService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +31,11 @@ export class FavouritesComponent implements OnInit {
     this.favouritesService.removeFavourite(movieId).subscribe(() => {
       this.favourites = this.favourites.filter((f) => f.id !== movieId);
     });
+    this.toastService.showToast(
+      'Removed',
+      'Movie removed from favourites',
+      'success'
+    );
   }
 
   public getImageUrl(path: string): string {

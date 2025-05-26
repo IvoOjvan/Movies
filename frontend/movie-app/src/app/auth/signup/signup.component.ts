@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 
 import { emailValidators, passwordValidator } from '../validators';
 import { SignupResponse } from '../../dtos/user.dto';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +24,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -65,9 +67,19 @@ export class SignupComponent implements OnInit {
         .subscribe({
           next: (response) => {
             console.log('Signup successful:', response);
+            this.toastService.showToast(
+              'Signup successfull',
+              'You have successfully singed up.',
+              'success'
+            );
             this.router.navigate(['/user/login']);
           },
           error: (error) => {
+            this.toastService.showToast(
+              'Signup failed',
+              error.error.message,
+              'error'
+            );
             console.error('Signup failed:', error);
           },
         });
