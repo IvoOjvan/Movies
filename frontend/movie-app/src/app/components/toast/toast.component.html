@@ -1,0 +1,11 @@
+@if (show) {
+<ngb-toast
+  [delay]="3000"
+  [header]="title"
+  [autohide]="false"
+  (hidden)="close()"
+  [class]="type"
+>
+  {{ message }}
+</ngb-toast>
+}
