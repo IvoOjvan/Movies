@@ -18,7 +18,7 @@ export class CastTablePagination implements OnChanges {
   @Input() data: Cast[] = [];
 
   page = 1;
-  pageSize = 4;
+  pageSize = 8;
   collectionSize = 0;
   cast: Cast[] = [];
 
