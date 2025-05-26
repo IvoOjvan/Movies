@@ -6,6 +6,7 @@ import { FavouritesService } from '../../services/favourites.service';
 import { ShowApiDataService } from '../../services/show-api-data.service';
 import { MovieDetails, MovieDTO } from '../../dtos/movie.dto';
 import { CastTablePagination } from '../../components/cast-table/cast-table-pagination';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-details-page',
@@ -19,7 +20,8 @@ export class DetailsPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private showApiDataService: ShowApiDataService,
-    private favouritesService: FavouritesService
+    private favouritesService: FavouritesService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -54,8 +56,18 @@ export class DetailsPageComponent implements OnInit {
     };
 
     this.favouritesService.addFavourite(movieDTO).subscribe({
-      next: () => alert('Movie added to favourites!'),
-      error: (err) => alert('Error: ' + err.error.message),
+      next: () => {
+        //alert('Movie added to favourites!');
+        this.toastService.showToast(
+          'Favourite',
+          'Movie was added to favourites.',
+          'success'
+        );
+      },
+      error: (err) => {
+        //alert('Error: ' + err.error.message);
+        this.toastService.showToast('Oops!?', err.error.message, 'error');
+      },
     });
   }
 }
