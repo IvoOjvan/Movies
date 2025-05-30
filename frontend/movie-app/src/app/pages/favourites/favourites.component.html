@@ -1,0 +1,51 @@
+<h1 class="mt-5 text-center">My Favourite Movies</h1>
+
+<div class="container my-4">
+  <div class="row g-4">
+    @for (movie of favourites; track movie.id) {
+    <div class="col-12 col-md-6">
+      <div
+        class="card h-100 shadow-sm"
+        tabindex="0"
+        role="button"
+        style="cursor: pointer"
+        (click)="showApiData.goToDetails(movie.id)"
+        (keydown.enter)="showApiData.goToDetails(movie.id)"
+        (keydown.space)="showApiData.goToDetails(movie.id)"
+      >
+        <div class="row g-0 align-items-center">
+          <div class="col-auto">
+            <img
+              [src]="getImageUrl(movie.poster_path)"
+              alt="{{ movie.title }}"
+              class="rounded-start custom-card-img"
+            />
+          </div>
+          <div class="col ps-3">
+            <div class="card-body py-2 px-2">
+              <h5 class="card-title mb-1">{{ movie.title }}</h5>
+              <div class="text-muted small mb-1">
+                {{ movie.release_date }}
+              </div>
+              <div class="text-secondary small mb-2">
+                <span class="vote">{{ movie.vote_average }}/10</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-1">
+            <button
+              type="button"
+              class="btn btn-link text-danger fs-4 p-0"
+              (click)="removeFromFavourites(movie.id); $event.stopPropagation()"
+              title="Remove"
+              tabindex="-1"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

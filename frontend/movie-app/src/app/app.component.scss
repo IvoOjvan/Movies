@@ -1,0 +1,9 @@
+.toast-wrapper {
+    z-index: 1080; // Bootstrap's modal z-index is 1050, so this is safe
+    pointer-events: none; // Makes sure it doesn’t block clicks unless you need interaction
+    margin-top: 70px;
+  }
+  
+  closable-toast ngb-toast {
+    pointer-events: auto; // Re-enable pointer events for the toast itself if needed
+  }

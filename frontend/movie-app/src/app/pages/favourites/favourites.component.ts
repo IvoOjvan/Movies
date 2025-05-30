@@ -1,0 +1,46 @@
+import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { ShowApiDataService } from '../../services/show-api-data.service';
+import { MovieDTO } from '../../dtos/movie.dto';
+import { FavouritesService } from '../../services/favourites.service';
+import { ToastService } from '../../services/toast.service';
+
+@Component({
+  selector: 'app-favourites',
+  imports: [RouterModule],
+  templateUrl: './favourites.component.html',
+  styleUrl: './favourites.component.scss',
+})
+export class FavouritesComponent implements OnInit {
+  public favourites: MovieDTO[] = [];
+
+  constructor(
+    private favouritesService: FavouritesService,
+    public showApiData: ShowApiDataService,
+    private toastService: ToastService
+  ) {}
+
+  ngOnInit(): void {
+    this.favouritesService
+      .getFavourites()
+      .subscribe((favs) => (this.favourites = favs));
+  }
+
+  public removeFromFavourites(movieId: number) {
+    this.favouritesService.removeFavourite(movieId).subscribe(() => {
+      this.favourites = this.favourites.filter((f) => f.id !== movieId);
+    });
+    this.toastService.showToast(
+      'Removed',
+      'Movie removed from favourites',
+      'success'
+    );
+  }
+
+  public getImageUrl(path: string): string {
+    return path
+      ? `https://image.tmdb.org/t/p/w500${path}`
+      : 'assets/images/logo.png';
+  }
+}
