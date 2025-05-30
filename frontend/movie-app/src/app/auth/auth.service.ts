@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { UserLogin } from '../dtos/user.dto';
 
@@ -29,32 +29,26 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  public login(email: string, password: string) {
+  public login(
+    email: string,
+    password: string
+  ): Observable<{ token: string; expiresIn: number }> {
     const authData: UserLogin = { email: email, password: password };
-    this.http
-      .post<{ token: string; expiresIn: number }>(
-        'http://localhost:5200/user/login',
-        authData
-      )
-      .subscribe((Response) => {
-        const token = Response.token;
-        this.token = token;
-        if (token) {
-          const expiresInDuration = Response.expiresIn;
-          this.setAuthTimer(expiresInDuration);
-          this.isAuthenticated = true;
-          console.log('Emitting true after login');
-          this.authStatusListener.next(true);
+    return this.http.post<{ token: string; expiresIn: number }>(
+      'http://localhost:5200/user/login',
+      authData
+    );
+  }
 
-          const now = new Date();
-          const expirationDate = new Date(
-            now.getTime() + expiresInDuration * 1000
-          );
-          console.log(expirationDate);
-          this.saveAuthData(token, expirationDate);
-          this.router.navigate(['/home']);
-        }
-      });
+  public handleLogin(token: string, expiresIn: number) {
+    this.token = token;
+    this.isAuthenticated = true;
+    this.authStatusListener.next(true);
+
+    const now = new Date();
+    const expirationDate = new Date(now.getTime() + expiresIn * 1000);
+    this.saveAuthData(token, expirationDate);
+    this.setAuthTimer(expiresIn);
   }
 
   public autoAuthUser() {
@@ -94,6 +88,7 @@ export class AuthService {
       this.logout();
     }, duration * 1000);
   }
+
   private saveAuthData(token: string, expirationDate: Date) {
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());

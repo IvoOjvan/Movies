@@ -59,9 +59,6 @@
     <h2 class="fw-bold">Details</h2>
     <div class="mb-3">
       <h3 class="fw-semibold">Cast</h3>
-      <!--@for (actor of movie.credits.cast; track actor.id) {
-      <span> {{ actor.name }} as {{ actor.character }}, </span>
-      }-->
       <!-- Paginated cast table -->
       <cast-table-pagination
         [data]="movie.credits.cast"
@@ -83,7 +80,6 @@
 
   <div class="col-md-3 ps-3">
     <h2 class="fw-bold">Facts</h2>
-    <!-- TODO: Add in this order: Original title, status, budget, revenue, keywords -->
     <div>
       <h6 class="fw-semibold">Original title</h6>
       <p>{{ movie.original_title }}</p>
