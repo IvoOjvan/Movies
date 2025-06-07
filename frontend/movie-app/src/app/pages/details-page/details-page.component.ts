@@ -57,7 +57,6 @@ export class DetailsPageComponent implements OnInit {
 
     this.favouritesService.addFavourite(movieDTO).subscribe({
       next: () => {
-        //alert('Movie added to favourites!');
         this.toastService.showToast(
           'Favourite',
           'Movie was added to favourites.',
@@ -65,7 +64,6 @@ export class DetailsPageComponent implements OnInit {
         );
       },
       error: (err) => {
-        //alert('Error: ' + err.error.message);
         this.toastService.showToast('Oops!?', err.error.message, 'error');
       },
     });
