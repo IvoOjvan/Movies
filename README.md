@@ -4,15 +4,11 @@ Angular and Node.js Express full stack project.
 
 # Tech Stack
 
-Frontend: Angular 19, Bootstrap 5, ng-bootstrap, RxJS, Swiper
-
-Backend: Node.js, Express.js, MongoDB (native driver)
-
-Authentication: JWT, bcrypt
-
-Validation: Joi
-
-Dev Tools: TypeScript, Nodemon, ts-node
+- **Frontend**: Angular 19, Bootstrap 5, ng-bootstrap, RxJS, Swiper
+- **Backend**: Node.js, Express.js, MongoDB (native driver)
+- **Authentication**: JWT, bcrypt
+- **Validation**: Joi
+- **Dev Tools**: TypeScript, Nodemon, ts-node
 
 # Prerequisites
 
@@ -83,3 +79,11 @@ The Angular app will run at http://localhost:4200.
 - TMDB API integration for dynamic movie content
 - Icon support via ng-icons
 - Lazy loading and modular design
+
+## Movie App Features
+
+- User login
+- Show movies by categories in carousels
+- Marking movies as favorites and removing them from favorites
+- Viewing movie details
+- Searching for movies by title
