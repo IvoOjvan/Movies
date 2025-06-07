@@ -120,25 +120,3 @@ movieRouter.delete("/:movieId/favourite", async (req, res) => {
     res.status(400).send({ message });
   }
 });
-
-/*
-movieRouter.put("/:id", async (req, res) => {
-  try {
-    const id = req?.params?.id;
-    const movie = req.body;
-    const query = { _id: new ObjectId(id) };
-    const result = await collections?.movies?.updateOne(query, { $set: movie });
-
-    if (result && result.matchedCount) {
-      res.status(200).send(`Updated an movie: ID ${id}.`);
-    } else if (!result?.matchedCount) {
-      res.status(404).send(`Failed to find an movie: ID ${id}`);
-    } else {
-      res.status(304).send(`Failed to update an movie: ID ${id}`);
-    }
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown error";
-    console.error(message);
-    res.status(400).send(message);
-  }
-});*/

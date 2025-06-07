@@ -3,7 +3,7 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
-  selector: 'closable-toast',
+  selector: 'app-toast',
   standalone: true,
   imports: [NgbToastModule],
   templateUrl: './toast.component.html',

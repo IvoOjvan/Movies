@@ -53,8 +53,6 @@ export class SignupComponent implements OnInit {
 
   public onSubmit() {
     if (this.signupForm.valid) {
-      console.log('Signup FOrm Submitted:', this.signupForm.value);
-
       const signupData = {
         email: this.signupForm.value.email,
         password: this.signupForm.value.password,
