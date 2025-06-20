@@ -1,0 +1,11 @@
+$color-greenish-blue: #27838b;
+.footer{
+    background-color: $color-greenish-blue;
+    color: white;
+    padding: 1rem 0;
+    margin-top: 1rem;
+
+    .tmdb-logo{
+        height: 2rem;
+    }
+}

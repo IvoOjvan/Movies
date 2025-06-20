@@ -27,7 +27,6 @@ userRouter.post("/signup", async (req, res) => {
       movies: [],
     };
     const result = await collections?.users?.insertOne(newUser);
-    console.log(newUser);
 
     if (result?.acknowledged) {
       //generating JWT token for immediate login after signup
@@ -77,7 +76,6 @@ userRouter.post("/login", async (req, res) => {
     const validSignInData = await userSignInSchema.validateAsync(signInData);
     const query = {
       email: validSignInData.email,
-      //password: validSignInData.password,
     };
     const user = await collections?.users?.findOne(query);
 

@@ -1,6 +1,5 @@
 import * as mongodb from "mongodb";
 import Joi from "joi";
-import { join } from "path";
 
 export interface Movie {
   _id?: mongodb.ObjectId;

@@ -17,7 +17,7 @@ import { firstValueFrom } from 'rxjs';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MovieSliderComponent implements OnInit {
-  readonly section = input<string>(); //intead of @Input
+  readonly section = input<string>();
   public movies: MovieDTO[] = [];
 
   constructor(private showApiDataService: ShowApiDataService) {}
